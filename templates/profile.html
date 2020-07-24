@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+ <h1 style="text-align: center;">My profile</h1><br>
+<div class="row">
+ <hr>
+ <div class="col-md-8">
+ 	
+	
+ <img src="{{visitor.photo.url}}" alt="img-fluid img-thumbnail" style="height: 250px;object-fit: cover; width: 300px;">
+ <h4><span style="color:lenen"> Name </span>: {{visitor.name}}</h4>
+ <h4><span style="color:Blue"> Address </span>: {{visitor.address}}</h4>
+ <a href="{% url 'blogapp:profileupdate' visitor.id %}">Update</a>
+ </div>	
+{% endblock %}

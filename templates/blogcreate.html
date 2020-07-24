@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="form-container">
+	
+ <div class="row">
+
+	<div class="col-md-4 mx-auto">
+		
+		<h4>Create Blog</h4>
+		<form method="POST">
+			{% csrf_token %}
+			{{form.as_p}}
+			<button>submit</button>
+		</form>	
+	</div>
+
+ </div>
+</div>
+{% endblock %}
