@@ -1,5 +1,5 @@
 from django import forms
-from .models import Blog,Author,Visitor
+from .models import Blog,Visitor
 
 
 class RegistrationForm(forms.ModelForm):

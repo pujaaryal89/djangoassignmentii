@@ -12,7 +12,7 @@ urlpatterns = [
     path('profileupdate/<int:pk>/', ProfileUpdateView.as_view(), name="profileupdate"),
     path('blogcreate', BlogCreateView.as_view(), name="blogcreate"),
     path('bloglist', BlogListView.as_view(), name="bloglist"),
-    path('blogedit/<int:id>/', BlogEditView.as_view(), name="blogedit"),
+    path('blogedit/<int:pk>/', BlogEditView.as_view(), name="blogedit"),
    
     
 

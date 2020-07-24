@@ -6,20 +6,27 @@
 <h3>BlogList</h3>
 <a href="{% url 'blogapp:blogcreate' %}">create</a> 
 <div class="row">
-{% for lists in list %}
+{% for blog in blogs %}
 	<div class="col-md-4 mt-3 mb-3">
 		<div class="card" style="width: 350px;">
-			{% if lists.image %}
-			<img class="card-img-top" src="{{lists.image.url}}" alt="img-fluid img-thumbnail" style="height: 250px;object-fit: cover; width: 350px;">
+			{% if blog.image %}
+			<img class="card-img-top" src="{{blog.image.url}}" alt="img-fluid img-thumbnail" style="height: 250px;object-fit: cover; width: 350px;">
 			{% else %}
 			<p>No image found!</p>
 
 			{% endif %}
 			<div class="card-body">
-				<h5 class="card-title"><a style="text-decoration: none !important" href="{% url 'blogapp:detail' lists.id %}">{{lists.title}}</a></h5>
-				<h5 class="card-title"><a style="text-decoration: none !important" href="">{{lists.author.name}}</a></h5>
+				<h5 class="card-title"><a style="text-decoration: none !important" href="">{{blog.title}}</a></h5>
+				<h5 class="card-title"><a style="text-decoration: none !important" href="">{{blog.author.name}}</a></h5>
+			
+
 			</div>
-				<a href="{% url 'blogapp:blogedit' lists.id %}">Edit</a>
+			   <!--  <h3>{{request.user}}</h3>
+				<h3>{{blog.author}}</h3>
+ -->
+			    {% if request.user.username == blog.author.name %}
+				 <a href="{% url 'blogapp:blogedit' blog.id %}">Edit</a>
+			    {% endif %}
 		</div>
 	</div>
      

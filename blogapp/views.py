@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import *
 from .forms import RegistrationForm,LoginForm,BlogCreateForm
-from .models import Blog,Author,Visitor
+from .models import Blog,Visitor
 from django.urls import reverse_lazy, reverse
 from django.http import JsonResponse
 from django.contrib.auth.models import User
@@ -93,13 +93,18 @@ class ProfileUpdateView(UserRequiredMixing,UpdateView):
 class BlogCreateView(LoginRequiredMixin, CreateView):
     form_class = BlogCreateForm
     template_name = 'blogcreate.html'
-    success_url = reverse_lazy('blog:bloglist')
+    success_url = reverse_lazy('blogapp:bloglist')
 
 
     def form_valid(self, form):
         if self.request.user.is_authenticated:
             visitor = self.request.user
-            form.instance.author=visitor
+            author=Visitor.objects.get(user=visitor)
+            form.instance.author=author
+            form.save()
+            return redirect(self.success_url)
+
+
 
 
 
@@ -107,13 +112,17 @@ class BlogCreateView(LoginRequiredMixin, CreateView):
 class BlogListView(UserRequiredMixing,ListView):
     template_name = 'bloglist.html'
     model = Blog
-    context_object_name = 'list'
+    context_object_name = 'blogs'
 
 class BlogEditView(UpdateView):
-    template_name = "create.html"
+    template_name = "blogcreate.html"
     form_class = BlogCreateForm
     model = Blog
     success_url = reverse_lazy('blogapp:bloglist')
+
+
+
+
 
 
   
